@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECHCO CRM — Панель управления</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-card__logo">
+        <div class="logo-box">T</div>
+        TECHCO CRM
+      </div>
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" name="email" placeholder="admin@techco.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Пароль</label>
+          <input type="password" id="loginPass" name="password" placeholder="••••••••" required>
+        </div>
+        <div id="loginError" class="login-error"></div>
+        <button type="submit" class="btn btn--primary btn--full" id="loginBtn">
+          Войти →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN APP (hidden until authenticated) -->
+  <div id="adminApp" class="admin-app" style="display:none">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <div class="logo-box">T</div>
+        <span>TECHCO CRM</span>
+      </div>
+
+      <nav class="sidebar__nav">
+        <a href="#" class="sidebar__link active" data-view="dashboard">
+          <span class="sidebar__icon">▦</span>
+          <span>Дашборд</span>
+        </a>
+        <a href="#" class="sidebar__link" data-view="contacts">
+          <span class="sidebar__icon">◈</span>
+          <span>Контакты</span>
+        </a>
+        <a href="#" class="sidebar__link" data-view="pipeline">
+          <span class="sidebar__icon">◧</span>
+          <span>Воронка</span>
+        </a>
+        <a href="#" class="sidebar__link" data-view="deals">
+          <span class="sidebar__icon">◉</span>
+          <span>Сделки</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__bottom">
+        <button class="sidebar__theme" id="themeToggleAdmin">
+          <span id="themeIconAdmin">☀</span>
+          <span>Тема</span>
+        </button>
+        <a href="index.html" class="sidebar__back">← На сайт</a>
+        <button id="logoutBtn" class="btn btn--outline btn--sm">Выйти</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h1 class="topbar__title" id="viewTitle">Дашборд</h1>
+        <div class="topbar__actions" id="topbarActions"></div>
+      </header>
+
+      <!-- VIEWS -->
+      <div class="view-container">
+
+        <!-- DASHBOARD -->
+        <section id="view-dashboard" class="view active">
+          <div class="dash-stats" id="dashStats">
+            <!-- Injected by JS -->
+          </div>
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card__title">Новые заявки</div>
+              <div id="newLeadsList"></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card__title">Сделки по этапам</div>
+              <div id="stagesBars"></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card__title">Ближайшие дедлайны (14 дней)</div>
+              <div id="upcomingDeadlines"></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card__title">Статус оплат</div>
+              <div id="paymentStatus"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACTS -->
+        <section id="view-contacts" class="view">
+          <div class="view-toolbar">
+            <input type="search" id="contactSearch" class="search-input" placeholder="Поиск по имени, компании...">
+            <select id="contactStatusFilter" class="filter-select">
+              <option value="">Все статусы</option>
+              <option value="lead">Лид</option>
+              <option value="client">Клиент</option>
+              <option value="archived">Архив</option>
+            </select>
+            <select id="contactSourceFilter" class="filter-select">
+              <option value="">Все источники</option>
+              <option value="contact_form">Форма</option>
+              <option value="manual">Вручную</option>
+              <option value="referral">Реферал</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table class="crm-table">
+              <thead>
+                <tr>
+                  <th>Имя</th>
+                  <th>Компания</th>
+                  <th>Контакт</th>
+                  <th>Статус</th>
+                  <th>Источник</th>
+                  <th>Дата</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- PIPELINE -->
+        <section id="view-pipeline" class="view">
+          <div id="kanbanBoard" class="kanban"></div>
+        </section>
+
+        <!-- DEALS -->
+        <section id="view-deals" class="view">
+          <div class="view-toolbar">
+            <input type="search" id="dealSearch" class="search-input" placeholder="Поиск по названию...">
+            <select id="dealStageFilter" class="filter-select">
+              <option value="">Все этапы</option>
+            </select>
+            <select id="dealPayFilter" class="filter-select">
+              <option value="">Все оплаты</option>
+              <option value="unpaid">Не оплачено</option>
+              <option value="partial">Частично</option>
+              <option value="paid">Оплачено</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table class="crm-table">
+              <thead>
+                <tr>
+                  <th>Название</th>
+                  <th>Клиент</th>
+                  <th>Этап</th>
+                  <th>Сумма</th>
+                  <th>Оплата</th>
+                  <th>Дедлайн</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody id="dealsTbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </div><!-- /view-container -->
+    </main>
+  </div><!-- /adminApp -->
+
+  <!-- MODAL -->
+  <div id="modal" class="modal" style="display:none">
+    <div class="modal__overlay" id="modalOverlay"></div>
+    <div class="modal__box">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle"></h2>
+        <button class="modal__close" id="modalClose">✕</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
