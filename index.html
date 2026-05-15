@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECHCO — Цифровые продукты и AI-системы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-box">T</span>
+        TECHCO
+      </a>
+      <nav class="nav__links">
+        <a href="#services">Услуги</a>
+        <a href="#process">Процесс</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#pricing">Цены</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+          <span class="theme-toggle__icon">☀</span>
+        </button>
+        <a href="#contact" class="btn btn--primary">Начать проект</a>
+      </div>
+      <button class="nav__burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#pricing">Цены</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn btn--primary">Начать проект</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge">✦ AI + Разработка</div>
+          <h1 class="hero__title">Цифровые продукты<br>и AI-системы<br><span class="hero__accent">для бизнеса</span></h1>
+          <p class="hero__sub">Один специалист с AI делает то, на что традиционной команде нужны месяцы. Сайты, CRM, AI-инструменты и автоматизация — в срок и в бюджет.</p>
+          <div class="hero__ctas">
+            <a href="#contact" class="btn btn--primary btn--lg">Начать проект →</a>
+            <a href="#cases" class="btn btn--outline btn--lg">Наши работы</a>
+          </div>
+        </div>
+        <div class="hero__card">
+          <div class="hero__card-header">
+            <span class="hero__card-dot" style="background:#FF3131"></span>
+            <span class="hero__card-dot" style="background:#FFD60A"></span>
+            <span class="hero__card-dot" style="background:#22c55e"></span>
+            <span style="margin-left:8px;font-size:12px;opacity:0.5">techco.dev</span>
+          </div>
+          <div class="hero__card-body">
+            <div class="hero__stat-item">
+              <span class="hero__stat-num">20+</span>
+              <span class="hero__stat-label">запущенных проектов</span>
+            </div>
+            <div class="hero__stat-item">
+              <span class="hero__stat-num">2-3</span>
+              <span class="hero__stat-label">недели средний срок</span>
+            </div>
+            <div class="hero__stat-item">
+              <span class="hero__stat-num">3+</span>
+              <span class="hero__stat-label">страны клиентов</span>
+            </div>
+            <div class="hero__stat-item">
+              <span class="hero__stat-num">95%</span>
+              <span class="hero__stat-label">довольных клиентов</span>
+            </div>
+          </div>
+          <div class="hero__card-tag">⚡ Первая оценка за 1 день</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <div class="marquee__track">
+          <span>React</span><span>Node.js</span><span>Python</span><span>OpenAI</span><span>PostgreSQL</span><span>TypeScript</span><span>Next.js</span><span>Docker</span><span>Telegram Bot</span><span>n8n</span><span>FastAPI</span><span>Supabase</span>
+          <span>React</span><span>Node.js</span><span>Python</span><span>OpenAI</span><span>PostgreSQL</span><span>TypeScript</span><span>Next.js</span><span>Docker</span><span>Telegram Bot</span><span>n8n</span><span>FastAPI</span><span>Supabase</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats" id="stats">
+      <div class="container stats__grid">
+        <div class="stat-card">
+          <span class="stat-card__num" data-target="20" data-suffix="+">0</span>
+          <span class="stat-card__label">запущенных проектов</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" data-target="2" data-suffix="-3 нед">0</span>
+          <span class="stat-card__label">средний срок доставки</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" data-target="3" data-suffix="+">0</span>
+          <span class="stat-card__label">страны клиентов</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" data-target="95" data-suffix="%">0</span>
+          <span class="stat-card__label">довольных клиентов</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMS -->
+    <section class="problems" id="problems">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Почему стандартные<br>решения не работают</h2>
+          <p class="section-sub">Знакомые ситуации?</p>
+        </div>
+        <div class="problems__grid">
+          <div class="problem-card">
+            <span class="problem-card__num">01</span>
+            <p>Шаблонные инструменты не подходят под уникальные процессы бизнеса</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-card__num">02</span>
+            <p>Агентства работают медленно — 3-4 месяца на то, что можно сделать за 2 недели</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-card__num">03</span>
+            <p>Сборка команды стоит $15-20k без гарантий результата</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-card__num">04</span>
+            <p>Большинство команд игнорируют интеграцию AI в продукт</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-card__num">05</span>
+            <p>Поддержка заканчивается сразу после сдачи проекта</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-card__num">06</span>
+            <p>Дешёвый аутсорс создаёт технический долг на годы вперёд</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="principles" id="principles">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Как мы работаем <span class="text-accent">иначе</span></h2>
+        </div>
+        <div class="principles__grid">
+          <div class="principle-card">
+            <span class="principle-card__num">1</span>
+            <h3>Под ваш процесс</h3>
+            <p>Продукт строится вокруг конкретных задач бизнеса, а не шаблонов</p>
+          </div>
+          <div class="principle-card">
+            <span class="principle-card__num">2</span>
+            <h3>В 2× быстрее</h3>
+            <p>AI-ускорение разработки — без потери качества и безопасности</p>
+          </div>
+          <div class="principle-card">
+            <span class="principle-card__num">3</span>
+            <h3>Полная прозрачность</h3>
+            <p>Демо каждые 5-7 дней, вы видите прогресс в реальном времени</p>
+          </div>
+          <div class="principle-card">
+            <span class="principle-card__num">4</span>
+            <h3>Фиксированная цена</h3>
+            <p>Объём, сроки и стоимость — зафиксированы в договоре</p>
+          </div>
+          <div class="principle-card">
+            <span class="principle-card__num">5</span>
+            <h3>Готово к росту</h3>
+            <p>Архитектура масштабируется вместе с вашим бизнесом</p>
+          </div>
+          <div class="principle-card">
+            <span class="principle-card__num">6</span>
+            <h3>30 дней поддержки</h3>
+            <p>Постлаунч поддержка включена в каждый проект без доплат</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Как проходит работа</h2>
+        </div>
+        <div class="process__steps">
+          <div class="process-step">
+            <div class="process-step__num">01</div>
+            <h3 class="process-step__title">Брифинг</h3>
+            <p class="process-step__desc">Разбираемся в задаче и целях</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">02</div>
+            <h3 class="process-step__title">Согласование</h3>
+            <p class="process-step__desc">Фиксируем объём и сроки</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">03</div>
+            <h3 class="process-step__title">Договор</h3>
+            <p class="process-step__desc">Подписываем и сразу стартуем</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">04</div>
+            <h3 class="process-step__title">Разработка</h3>
+            <p class="process-step__desc">Дизайн + код с демо каждую неделю</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">05</div>
+            <h3 class="process-step__title">Запуск</h3>
+            <p class="process-step__desc">Сдача и 30 дней поддержки</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Услуги</h2>
+          <p class="section-sub">Каждый продукт — под ваш процесс</p>
+        </div>
+        <div class="services__grid">
+          <div class="service-card">
+            <span class="service-card__icon">🌐</span>
+            <h3>Веб-приложения</h3>
+            <p>SaaS, маркетплейсы, порталы — с нуля до продакшна</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">📊</span>
+            <h3>CRM-системы</h3>
+            <p>Управление клиентами и продажами под ваши процессы</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">🤖</span>
+            <h3>AI-инструменты</h3>
+            <p>Боты, ассистенты, автоклассификация и генерация контента</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">⚡</span>
+            <h3>Автоматизация</h3>
+            <p>Избавляем от рутины через n8n, Zapier и кастомные скрипты</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">🔗</span>
+            <h3>Интеграции</h3>
+            <p>Связываем ваши сервисы: CRM, платёжки, логистика, API</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">📈</span>
+            <h3>Дашборды</h3>
+            <p>Аналитика в реальном времени для управленческих решений</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">🛠</span>
+            <h3>Админ-панели</h3>
+            <p>Удобное управление данными, пользователями и контентом</p>
+          </div>
+          <div class="service-card">
+            <span class="service-card__icon">👥</span>
+            <h3>Клиентские порталы</h3>
+            <p>Личный кабинет для клиентов с документами и статусами</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section class="calculator" id="calculator">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Калькулятор стоимости</h2>
+          <p class="section-sub">Выбери параметры — получи ориентир по цене и срокам</p>
+        </div>
+        <div class="calc__inner">
+          <div class="calc__steps">
+            <div class="calc__step">
+              <h3 class="calc__step-title">1. Тип проекта</h3>
+              <div class="calc__options" id="calcTypes">
+                <button class="calc__option" data-type="webapp" data-price="700" data-weeks="1-2">🌐 Веб-приложение</button>
+                <button class="calc__option" data-type="crm" data-price="1500" data-weeks="3-4">📊 CRM-система</button>
+                <button class="calc__option" data-type="ai" data-price="1800" data-weeks="2-4">🤖 AI-инструмент</button>
+                <button class="calc__option" data-type="auto" data-price="1000" data-weeks="1-3">⚡ Автоматизация</button>
+                <button class="calc__option" data-type="complex" data-price="5000" data-weeks="8-16">🏗 Сложная платформа</button>
+              </div>
+            </div>
+            <div class="calc__step">
+              <h3 class="calc__step-title">2. Дополнительные функции</h3>
+              <div class="calc__features" id="calcFeatures">
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="300"> Интеграции с внешними сервисами <span class="calc__feature-price">+$300</span>
+                </label>
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="400"> Аналитический дашборд <span class="calc__feature-price">+$400</span>
+                </label>
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="200"> Адаптация под мобильные <span class="calc__feature-price">+$200</span>
+                </label>
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="600"> AI / ML функции <span class="calc__feature-price">+$600</span>
+                </label>
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="300"> Админ-панель <span class="calc__feature-price">+$300</span>
+                </label>
+                <label class="calc__feature">
+                  <input type="checkbox" data-price="400"> Клиентский портал <span class="calc__feature-price">+$400</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="calc__result" id="calcResult">
+            <div class="calc__result-placeholder">
+              <span>←</span>
+              <p>Выбери тип проекта,<br>чтобы увидеть оценку</p>
+            </div>
+            <div class="calc__result-content" style="display:none">
+              <div class="calc__price-row">
+                <span class="calc__label">Стоимость от</span>
+                <span class="calc__price" id="calcPrice">$700</span>
+              </div>
+              <div class="calc__price-row">
+                <span class="calc__label">Срок</span>
+                <span class="calc__weeks" id="calcWeeks">1-2 нед.</span>
+              </div>
+              <p class="calc__disclaimer">Финальная цена фиксируется после брифинга</p>
+              <a href="#contact" class="btn btn--primary btn--full">Обсудить проект →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASES -->
+    <section class="cases" id="cases">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Кейсы</h2>
+          <p class="section-sub">Реальные результаты для реальных бизнесов</p>
+        </div>
+        <div class="cases__grid">
+          <div class="case-card">
+            <div class="case-card__header" style="background:#FFD60A">
+              <span class="case-card__emoji">✈️</span>
+            </div>
+            <div class="case-card__body">
+              <div class="case-card__meta">
+                <span class="case-card__tag">Туризм</span>
+                <span class="case-card__time">6 недель</span>
+                <span class="case-card__price">от $4 500</span>
+              </div>
+              <h3>Travel Booking Service</h3>
+              <p>Платформа поиска и бронирования туров с онлайн-оплатой и CRM</p>
+              <div class="case-card__results">
+                <div class="case-card__result">
+                  <span class="case-card__result-num">×3</span>
+                  <span>онлайн-брони</span>
+                </div>
+                <div class="case-card__result">
+                  <span class="case-card__result-num">−45%</span>
+                  <span>отмен</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-card__header" style="background:#c4b5fd">
+              <span class="case-card__emoji">🚗</span>
+            </div>
+            <div class="case-card__body">
+              <div class="case-card__meta">
+                <span class="case-card__tag">Авто</span>
+                <span class="case-card__time">5 недель</span>
+                <span class="case-card__price">от $3 800</span>
+              </div>
+              <h3>Car Rental Admin</h3>
+              <p>Система управления автопарком с онлайн-бронированием и аналитикой</p>
+              <div class="case-card__results">
+                <div class="case-card__result">
+                  <span class="case-card__result-num">+70%</span>
+                  <span>скорость обработки</span>
+                </div>
+                <div class="case-card__result">
+                  <span class="case-card__result-num">0</span>
+                  <span>двойных броней</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-card__header" style="background:#86efac">
+              <span class="case-card__emoji">🍽️</span>
+            </div>
+            <div class="case-card__body">
+              <div class="case-card__meta">
+                <span class="case-card__tag">HoReCa</span>
+                <span class="case-card__time">4 недели</span>
+                <span class="case-card__price">от $2 800</span>
+              </div>
+              <h3>Restaurant Platform</h3>
+              <p>Онлайн-меню, бронирование столов и система управления заказами</p>
+              <div class="case-card__results">
+                <div class="case-card__result">
+                  <span class="case-card__result-num">+25%</span>
+                  <span>средний чек</span>
+                </div>
+                <div class="case-card__result">
+                  <span class="case-card__result-num">−40%</span>
+                  <span>время ожидания</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-card__header" style="background:#fca5a5">
+              <span class="case-card__emoji">🤖</span>
+            </div>
+            <div class="case-card__body">
+              <div class="case-card__meta">
+                <span class="case-card__tag">AI / SMM</span>
+                <span class="case-card__time">3 недели</span>
+                <span class="case-card__price">от $1 800</span>
+              </div>
+              <h3>SMM AI Bot</h3>
+              <p>AI-бот для автоматической генерации контента и ответов в соцсетях</p>
+              <div class="case-card__results">
+                <div class="case-card__result">
+                  <span class="case-card__result-num">70%</span>
+                  <span>контента AI</span>
+                </div>
+                <div class="case-card__result">
+                  <span class="case-card__result-num">−15 ч</span>
+                  <span>в неделю</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Тарифы</h2>
+        </div>
+        <div class="pricing__grid">
+          <div class="pricing-card">
+            <h3>MVP / Быстрый старт</h3>
+            <div class="pricing-card__price">от $700</div>
+            <div class="pricing-card__period">1-2 недели</div>
+            <ul class="pricing-card__list">
+              <li>✓ Компактное веб-приложение или автоматизация</li>
+              <li>✓ Дизайн + разработка</li>
+              <li>✓ 30 дней поддержки</li>
+              <li>✓ Готово к запуску</li>
+            </ul>
+            <a href="#contact" class="btn btn--outline btn--full">Выбрать</a>
+          </div>
+          <div class="pricing-card pricing-card--featured">
+            <div class="pricing-card__badge">★ Популярный</div>
+            <h3>Стандартный проект</h3>
+            <div class="pricing-card__price">от $1 800</div>
+            <div class="pricing-card__period">3-6 недель</div>
+            <ul class="pricing-card__list">
+              <li>✓ CRM, портал или AI-инструмент</li>
+              <li>✓ Интеграции с внешними сервисами</li>
+              <li>✓ Аналитика и дашборд</li>
+              <li>✓ 30 дней поддержки</li>
+              <li>✓ Масштабируемая архитектура</li>
+            </ul>
+            <a href="#contact" class="btn btn--dark btn--full">Выбрать</a>
+          </div>
+          <div class="pricing-card">
+            <h3>Полный продукт</h3>
+            <div class="pricing-card__price">от $5 000</div>
+            <div class="pricing-card__period">2-4 месяца</div>
+            <ul class="pricing-card__list">
+              <li>✓ Сложные платформы и мультимодульные системы</li>
+              <li>✓ Расширенные AI-интеграции</li>
+              <li>✓ Выделенная поддержка</li>
+              <li>✓ Roadmap и итерационное развитие</li>
+            </ul>
+            <a href="#contact" class="btn btn--outline btn--full">Выбрать</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Обсудим проект</h2>
+          <p class="section-sub">Первичная оценка — в течение одного рабочего дня</p>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="contact-form__row">
+            <div class="form-group">
+              <label>Ваше имя *</label>
+              <input type="text" name="name" placeholder="Александр" required>
+            </div>
+            <div class="form-group">
+              <label>Компания / стартап</label>
+              <input type="text" name="company" placeholder="ООО «Ромашка»">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Опишите проект *</label>
+            <textarea name="description" rows="4" placeholder="Что нужно сделать, какие задачи решить, есть ли дедлайн..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Предпочтительный способ связи</label>
+            <div class="contact-options">
+              <label class="contact-option"><input type="radio" name="contact" value="telegram"> Telegram</label>
+              <label class="contact-option"><input type="radio" name="contact" value="whatsapp"> WhatsApp</label>
+              <label class="contact-option"><input type="radio" name="contact" value="email"> Email</label>
+              <label class="contact-option"><input type="radio" name="contact" value="phone"> Телефон</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg">Отправить заявку →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Частые вопросы</h2>
+        </div>
+        <div class="faq__list">
+          <div class="faq-item">
+            <button class="faq-item__q">Как формируется цена? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>Стоимость зависит от объёма функций, интеграций и сложности дизайна. После брифинга мы фиксируем цену в договоре — никаких неожиданных доплат по ходу проекта.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__q">Сколько реально занимает разработка? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>MVP — 1-2 недели, стандартный проект — 3-6 недель, сложная платформа — 2-4 месяца. Сроки фиксируются в договоре и мы их соблюдаем.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__q">Подходит ли это для малого бизнеса? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>Да. Большинство наших клиентов — малый и средний бизнес. Стартуем от $700, и MVP можно запустить за 2 недели, чтобы протестировать гипотезу до больших вложений.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__q">Нужно ли разбираться в технологиях? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>Нет. Мы говорим на языке бизнес-задач. Вы описываете проблему и результат, который хотите получить — технические решения мы предлагаем сами.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__q">Что входит в 30 дней поддержки? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>Исправление ошибок, консультации, мелкие правки в интерфейсе. Если нужно масштабировать или добавить функции — обсуждаем отдельно.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__q">Можно ли развивать продукт после запуска? <span>+</span></button>
+            <div class="faq-item__a">
+              <p>Да, и мы на это делаем ставку. Изначально строим архитектуру с учётом роста, а после запуска можем работать итерациями — спринтами по 1-2 недели.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner__inner">
+          <h2>Есть идея?<br>Давай построим.</h2>
+          <p>Без обязательств — просто расскажи о задаче</p>
+          <div class="cta-banner__btns">
+            <a href="https://t.me/yourtelegram" class="btn btn--dark btn--lg">→ Telegram</a>
+            <a href="mailto:hello@techco.dev" class="btn btn--dark btn--lg">✉ Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="nav__logo">
+          <span class="nav__logo-box">T</span>
+          TECHCO
+        </a>
+        <p>Цифровые продукты и AI-системы для бизнеса</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h4>Услуги</h4>
+          <a href="#services">Веб-приложения</a>
+          <a href="#services">CRM-системы</a>
+          <a href="#services">AI-инструменты</a>
+          <a href="#services">Автоматизация</a>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <a href="#cases">Кейсы</a>
+          <a href="#pricing">Цены</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Контакты</a>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <a href="https://t.me/yourtelegram">Telegram</a>
+          <a href="mailto:hello@techco.dev">hello@techco.dev</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© 2025 TECHCO. Все права защищены.</span>
+      <a href="admin.html" class="footer__admin-link">admin</a>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="#contact" class="btn btn--primary btn--full">Начать проект →</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
