@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для Дианы ♥</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #08080f;
+      color: #fff;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      animation: float-up linear forwards;
+    }
+
+    @keyframes float-up {
+      0%   { transform: translateY(100vh) scale(0.4); opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+    }
+
+    .stage {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 1.5rem;
+      width: min(540px, 100vw - 2rem);
+    }
+
+    /* ---- Cards ---- */
+    .card { display: none; }
+    .card.visible {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: card-in 0.65s cubic-bezier(.22,.68,0,1.15) both;
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ---- Title ---- */
+    .name {
+      font-size: clamp(4rem, 14vw, 7.5rem);
+      font-style: italic;
+      background: linear-gradient(135deg, #ff6b9d 0%, #ffaac8 55%, #ffd6e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .for-you {
+      color: rgba(255, 214, 232, .55);
+      font-size: .9rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+    }
+
+    /* ---- Beautiful photo ---- */
+    .photo-beautiful {
+      max-height: 54vh;
+      width: auto;
+      max-width: 100%;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 107, 157, .55);
+      box-shadow: 0 0 56px rgba(255, 107, 157, .35), 0 8px 32px rgba(0,0,0,.5);
+      margin-bottom: 1rem;
+    }
+
+    /* ---- Polaroid (funny) ---- */
+    .polaroid {
+      display: inline-block;
+      background: #fff;
+      padding: 8px 8px 34px;
+      border-radius: 2px;
+      box-shadow: 4px 6px 28px rgba(0,0,0,.65);
+      transform: rotate(var(--rot, -2deg));
+      transition: transform .3s ease;
+      margin-bottom: 1rem;
+    }
+    .polaroid:hover { transform: rotate(0deg) scale(1.02); }
+    .polaroid img {
+      display: block;
+      max-height: 46vh;
+      width: auto;
+      max-width: calc(100vw - 64px);
+    }
+
+    /* ---- Captions ---- */
+    .caption-big {
+      font-size: clamp(1.1rem, 3.8vw, 1.45rem);
+      font-style: italic;
+      color: #ff8ab4;
+      margin-bottom: .25rem;
+    }
+    .caption-small {
+      font-size: .83rem;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 1.4rem;
+      letter-spacing: .02em;
+    }
+
+    /* ---- Final card ---- */
+    .big-heart {
+      font-size: 4.5rem;
+      display: block;
+      margin-bottom: .9rem;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.12); }
+    }
+
+    .final-text {
+      font-size: clamp(.95rem, 3.3vw, 1.2rem);
+      line-height: 2;
+      color: rgba(255,255,255,.82);
+      margin-bottom: 1.3rem;
+    }
+    .final-text p + p { margin-top: .4rem; }
+
+    .final-love {
+      font-size: clamp(1.25rem, 4.2vw, 1.6rem);
+      font-style: italic;
+      background: linear-gradient(135deg, #ff6b9d, #ffaac8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: .5rem;
+    }
+
+    .signature {
+      color: rgba(255,255,255,.28);
+      font-size: .82rem;
+      letter-spacing: .1em;
+    }
+
+    /* ---- Button ---- */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b9d, #c850c0);
+      color: #fff;
+      border: none;
+      padding: 12px 36px;
+      font-size: .9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: .07em;
+      font-family: inherit;
+      transition: transform .18s, box-shadow .18s;
+      box-shadow: 0 4px 22px rgba(255,107,157,.38);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(255,107,157,.58);
+    }
+    .btn:active { transform: translateY(-1px); }
+
+    /* ---- Progress dots ---- */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 1.6rem;
+      min-height: 10px;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.14);
+      transition: background .35s, transform .35s;
+    }
+    .dot.lit { background: #ff6b9d; transform: scale(1.35); }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="stage">
+  <div class="dots" id="dots"></div>
+
+  <!-- 0: Title -->
+  <div class="card visible" id="c0">
+    <div class="name">Диана</div>
+    <div class="for-you">это тебе ✦</div>
+    <button class="btn" onclick="next()">открыть &rarr;</button>
+  </div>
+
+  <!-- 1: Beautiful -->
+  <div class="card" id="c1">
+    <img src="diana-photos/beautiful.jpg" class="photo-beautiful" alt="">
+    <div class="caption-big">Ты такая.</div>
+    <div class="caption-small">и я каждый раз не верю своим глазам</div>
+    <button class="btn" onclick="next()">дальше &rarr;</button>
+  </div>
+
+  <!-- 2: Pink bear hat -->
+  <div class="card" id="c2">
+    <div class="polaroid" style="--rot: -2deg">
+      <img src="diana-photos/funny4.jpg" alt="">
+    </div>
+    <div class="caption-big">И такая.</div>
+    <div class="caption-small">медведь? принцесса? не важно — в любом образе</div>
+    <button class="btn" onclick="next()">дальше &rarr;</button>
+  </div>
+
+  <!-- 3: Red helmet Modi -->
+  <div class="card" id="c3">
+    <div class="polaroid" style="--rot: 1.5deg">
+      <img src="diana-photos/funny3.jpg" alt="">
+    </div>
+    <div class="caption-big">Главный инженер Modi.</div>
+    <div class="caption-small">диссертация по строительным шлемам защищена успешно</div>
+    <button class="btn" onclick="next()">дальше &rarr;</button>
+  </div>
+
+  <!-- 4: Ice rink puffer -->
+  <div class="card" id="c4">
+    <div class="polaroid" style="--rot: -1.5deg">
+      <img src="diana-photos/funny2.jpg" alt="">
+    </div>
+    <div class="caption-big">Маленький пуфик на льду.</div>
+    <div class="caption-small">укутана во весь тёплый мир. мне нравится.</div>
+    <button class="btn" onclick="next()">дальше &rarr;</button>
+  </div>
+
+  <!-- 5: Thumbs up groceries -->
+  <div class="card" id="c5">
+    <div class="polaroid" style="--rot: 2deg">
+      <img src="diana-photos/funny1.jpg" alt="">
+    </div>
+    <div class="caption-big">Выход в подъезд — тоже выход.</div>
+    <div class="caption-small">kappa + пакеты + уверенность = стиль</div>
+    <button class="btn" onclick="next()">дальше &rarr;</button>
+  </div>
+
+  <!-- 6: Final -->
+  <div class="card" id="c6">
+    <span class="big-heart">&#9829;</span>
+    <div class="final-text">
+      <p>Знаешь что?</p>
+      <p>Мне нравятся все твои стороны.<br>
+      Та которая красивая.<br>
+      И та которая медведь в ТЦ.</p>
+      <p>Все. Просто все.</p>
+    </div>
+    <div class="final-love">Я люблю тебя, Диана.</div>
+    <div class="signature">— Тимур</div>
+  </div>
+</div>
+
+<script>
+  /* Stars */
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function makeStars(n) {
+    return Array.from({ length: n }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.3 + 0.2,
+      o: Math.random(),
+      d: (Math.random() * 0.004 + 0.002) * (Math.random() < .5 ? 1 : -1)
+    }));
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (const s of stars) {
+      s.o += s.d;
+      if (s.o > 1 || s.o < 0.05) s.d *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,200,230,${s.o.toFixed(2)})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  stars = makeStars(160);
+  tick();
+  window.addEventListener('resize', () => { resize(); stars = makeStars(160); });
+
+  /* Floating hearts */
+  const GLYPHS = ['♥', '✶', '✿', '❀', '♡'];
+  const COLORS = ['#ff6b9d','#ffaac8','#ffd6e8','#ff4d8a','#ffa0c4'];
+
+  function spawnHeart() {
+    const el = document.createElement('div');
+    el.className = 'heart-particle';
+    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    const sz = Math.random() * 18 + 9;
+    el.style.cssText = `left:${Math.random()*100}vw;font-size:${sz}px;color:${COLORS[Math.floor(Math.random()*COLORS.length)]};animation-duration:${(Math.random()*5+7).toFixed(1)}s;`;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+  setInterval(spawnHeart, 900);
+
+  /* Cards */
+  const TOTAL = 7;
+  let cur = 0;
+
+  const dotsEl = document.getElementById('dots');
+  const dotEls = [];
+  for (let i = 1; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    dotsEl.appendChild(d);
+    dotEls.push(d);
+  }
+
+  function updateDots() {
+    dotEls.forEach((d, i) => d.classList.toggle('lit', i < cur));
+  }
+
+  function next() {
+    if (cur >= TOTAL - 1) return;
+    document.getElementById('c' + cur).classList.remove('visible');
+    cur++;
+    document.getElementById('c' + cur).classList.add('visible');
+    updateDots();
+    if (cur === TOTAL - 1) {
+      for (let i = 0; i < 16; i++) setTimeout(spawnHeart, i * 150);
+    }
+  }
+</script>
+</body>
+</html>
