@@ -18,50 +18,129 @@
       justify-content: center;
     }
 
-    #stars {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+    #stars  { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    #aurora {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; opacity: 0.2;
+      transition: background 1.8s ease;
     }
 
-    .heart-particle {
+    #flash  {
+      position: fixed; inset: 0; z-index: 500;
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.06s;
+    }
+
+    /* ======= AMBIENT FLOATERS ======= */
+    .floater {
       position: fixed;
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
       animation: float-up linear forwards;
     }
-
     @keyframes float-up {
-      0%   { transform: translateY(100vh) scale(0.4); opacity: 0; }
-      10%  { opacity: 0.8; }
-      90%  { opacity: 0.3; }
-      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+      0%   { transform: translateY(105vh) scale(.4) rotate(0deg); opacity: 0; }
+      10%  { opacity: .85; }
+      90%  { opacity: .25; }
+      100% { transform: translateY(-8vh) scale(1.1) rotate(25deg); opacity: 0; }
     }
 
+    /* ======= STAGE ======= */
     .stage {
-      position: relative;
-      z-index: 10;
+      position: relative; z-index: 10;
       text-align: center;
       padding: 1.5rem;
       width: min(540px, 100vw - 2rem);
     }
 
-    /* ---- Cards ---- */
-    .card { display: none; }
-    .card.visible {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: card-in 0.65s cubic-bezier(.22,.68,0,1.15) both;
+    /* ======= CARDS ======= */
+    .card { display: none; position: relative; }
+    .card.visible { display: flex; flex-direction: column; align-items: center; }
+
+    /* EXIT animations */
+    @keyframes ex-left  { to { transform: translateX(-120%) rotate(-22deg) scale(.8); opacity: 0; } }
+    @keyframes ex-right { to { transform: translateX(120%)  rotate(22deg)  scale(.8); opacity: 0; } }
+    @keyframes ex-shrink{ to { transform: scale(0) rotate(200deg); opacity: 0; } }
+    @keyframes ex-spin  { to { transform: rotate(720deg) scale(0); opacity: 0; } }
+    @keyframes ex-fold  { to { transform: perspective(600px) rotateX(90deg) translateY(-60px); opacity: 0; } }
+    @keyframes ex-drop  { to { transform: translateY(120%) rotate(10deg) scale(.7); opacity: 0; } }
+
+    .ex-left  { animation: ex-left   .5s cubic-bezier(.55,0,1,.45) forwards !important; }
+    .ex-right { animation: ex-right  .5s cubic-bezier(.55,0,1,.45) forwards !important; }
+    .ex-shrink{ animation: ex-shrink .45s cubic-bezier(.55,0,1,.45) forwards !important; }
+    .ex-spin  { animation: ex-spin   .48s ease-in forwards !important; }
+    .ex-fold  { animation: ex-fold   .4s  ease-in forwards !important; }
+    .ex-drop  { animation: ex-drop   .45s ease-in forwards !important; }
+
+    /* ENTER animations */
+    @keyframes en-zoom {
+      0%  { transform: scale(.04) rotate(-18deg); opacity: 0; }
+      65% { transform: scale(1.06) rotate(2deg); opacity: 1; }
+      82% { transform: scale(.97) rotate(-1deg); }
+      100%{ transform: none; opacity: 1; }
+    }
+    @keyframes en-slide {
+      from { transform: translateX(110%) rotate(6deg); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+    @keyframes en-bounce {
+      0%  { transform: translateY(-90%) scale(.5); opacity: 0; }
+      50% { transform: translateY(18px) scale(1.06); opacity: 1; }
+      70% { transform: translateY(-9px) scale(.97); }
+      85% { transform: translateY(5px) scale(1.01); }
+      100%{ transform: none; opacity: 1; }
+    }
+    @keyframes en-flip {
+      from { transform: perspective(700px) rotateY(-90deg) scale(.7); opacity: 0; }
+      60%  { transform: perspective(700px) rotateY(12deg); opacity: 1; }
+      80%  { transform: perspective(700px) rotateY(-5deg); }
+      100% { transform: none; opacity: 1; }
+    }
+    @keyframes en-glitch {
+      0%  { transform: translateX(-45px) skew(-9deg); opacity: 0; filter: hue-rotate(90deg) saturate(4); }
+      20% { transform: translateX(28px)  skew(5deg);  opacity: .55; filter: hue-rotate(-60deg); }
+      38% { transform: translateX(-16px) skew(-3deg); opacity: .8; filter: none; }
+      55% { transform: translateX(8px); opacity: .9; }
+      72% { transform: translateX(-4px); }
+      86% { transform: translateX(2px); }
+      100%{ transform: none; opacity: 1; }
+    }
+    @keyframes en-rise {
+      from { transform: translateY(75px) scale(.82); opacity: 0; filter: blur(10px); }
+      55%  { filter: blur(0); }
+      to   { transform: none; opacity: 1; filter: blur(0); }
+    }
+    @keyframes en-spin-in {
+      from { transform: rotate(-360deg) scale(.1); opacity: 0; }
+      70%  { transform: rotate(15deg) scale(1.05); opacity: 1; }
+      85%  { transform: rotate(-5deg); }
+      100% { transform: none; opacity: 1; }
     }
 
-    @keyframes card-in {
-      from { opacity: 0; transform: translateY(22px) scale(0.97); }
-      to   { opacity: 1; transform: none; }
-    }
+    .en-zoom   { animation: en-zoom    .62s cubic-bezier(.22,.68,0,1.2) both; }
+    .en-slide  { animation: en-slide   .5s  cubic-bezier(.22,.68,0,1.1) both; }
+    .en-bounce { animation: en-bounce  .7s  cubic-bezier(.22,.68,0,1.1) both; }
+    .en-flip   { animation: en-flip    .6s  cubic-bezier(.22,.68,0,1.1) both; }
+    .en-glitch { animation: en-glitch  .55s ease both; }
+    .en-rise   { animation: en-rise    .6s  cubic-bezier(.22,.68,0,1.1) both; }
+    .en-spin-in{ animation: en-spin-in .65s cubic-bezier(.22,.68,0,1.2) both; }
 
-    /* ---- Title ---- */
+    /* SHAKE */
+    @keyframes shake-anim {
+      0%,100%{ transform: translate(0,0) rotate(0); }
+      12%{ transform: translate(-9px,-4px) rotate(-.6deg); }
+      24%{ transform: translate(9px, 4px) rotate( .6deg); }
+      36%{ transform: translate(-5px, 9px) rotate(-.4deg); }
+      48%{ transform: translate(5px,-6px) rotate( .4deg); }
+      60%{ transform: translate(-9px, 6px) rotate(-.6deg); }
+      72%{ transform: translate(9px,-4px) rotate( .6deg); }
+      84%{ transform: translate(-4px,-8px) rotate(-.3deg); }
+      96%{ transform: translate(6px, 7px) rotate( .3deg); }
+    }
+    .shaking { animation: shake-anim .5s ease both; }
+
+    /* ======= TITLE ======= */
     .name {
       font-size: clamp(4rem, 14vw, 7.5rem);
       font-style: italic;
@@ -71,28 +150,34 @@
       background-clip: text;
       line-height: 1;
       margin-bottom: .5rem;
+      animation: name-glow 3s ease-in-out infinite;
+    }
+    @keyframes name-glow {
+      0%,100%{ filter: drop-shadow(0 0 18px rgba(255,107,157,.4)); }
+      50%    { filter: drop-shadow(0 0 55px rgba(255,107,157,.85)); }
     }
 
     .for-you {
-      color: rgba(255, 214, 232, .55);
+      color: rgba(255,214,232,.52);
       font-size: .9rem;
       letter-spacing: .22em;
       text-transform: uppercase;
       margin-bottom: 2.2rem;
+      animation: fade-blink 1s ease .4s both;
     }
+    @keyframes fade-blink { 0%,60%{opacity:0;} 100%{opacity:1;} }
 
-    /* ---- Beautiful photo ---- */
+    /* ======= PHOTOS ======= */
     .photo-beautiful {
-      max-height: 54vh;
-      width: auto;
-      max-width: 100%;
+      max-height: 54vh; width: auto; max-width: 100%;
       border-radius: 16px;
-      border: 2px solid rgba(255, 107, 157, .55);
-      box-shadow: 0 0 56px rgba(255, 107, 157, .35), 0 8px 32px rgba(0,0,0,.5);
+      border: 2px solid rgba(255,107,157,.55);
+      box-shadow: 0 0 56px rgba(255,107,157,.35), 0 8px 32px rgba(0,0,0,.5);
       margin-bottom: 1rem;
+      transition: transform .12s ease;
+      will-change: transform;
     }
 
-    /* ---- Polaroid (funny) ---- */
     .polaroid {
       display: inline-block;
       background: #fff;
@@ -102,16 +187,20 @@
       transform: rotate(var(--rot, -2deg));
       transition: transform .3s ease;
       margin-bottom: 1rem;
+      will-change: transform;
     }
-    .polaroid:hover { transform: rotate(0deg) scale(1.02); }
-    .polaroid img {
-      display: block;
-      max-height: 46vh;
-      width: auto;
-      max-width: calc(100vw - 64px);
-    }
+    .polaroid:hover { transform: rotate(0deg) scale(1.03) !important; }
+    .polaroid img   { display: block; max-height: 46vh; width: auto; max-width: calc(100vw - 80px); }
 
-    /* ---- Captions ---- */
+    /* ======= SPARKLE ======= */
+    @keyframes sparkle-pop {
+      0%  { transform: scale(0) rotate(0deg); opacity: 1; }
+      55% { transform: scale(1.4) rotate(25deg); opacity: .9; }
+      100%{ transform: scale(0) rotate(50deg); opacity: 0; }
+    }
+    .sparkle-el { animation: sparkle-pop .75s ease forwards; position: fixed; pointer-events: none; z-index: 60; }
+
+    /* ======= CAPTIONS ======= */
     .caption-big {
       font-size: clamp(1.1rem, 3.8vw, 1.45rem);
       font-style: italic;
@@ -124,93 +213,89 @@
       margin-bottom: 1.4rem;
       letter-spacing: .02em;
     }
+    .caption-big span, .caption-small span {
+      display: inline-block;
+      transition: opacity .22s, transform .22s;
+    }
 
-    /* ---- Final card ---- */
+    /* ======= FINAL ======= */
     .big-heart {
-      font-size: 4.5rem;
-      display: block;
+      font-size: 4.5rem; display: block;
       margin-bottom: .9rem;
-      animation: pulse 1.5s ease-in-out infinite;
+      animation: heart-pulse 1.4s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.12); }
+    @keyframes heart-pulse {
+      0%,100%{ transform: scale(1); }
+      50%    { transform: scale(1.18); filter: drop-shadow(0 0 30px #ff6b9d); }
     }
-
     .final-text {
       font-size: clamp(.95rem, 3.3vw, 1.2rem);
-      line-height: 2;
-      color: rgba(255,255,255,.82);
+      line-height: 2; color: rgba(255,255,255,.82);
       margin-bottom: 1.3rem;
     }
-    .final-text p + p { margin-top: .4rem; }
-
+    .final-text p+p { margin-top: .4rem; }
     .final-love {
       font-size: clamp(1.25rem, 4.2vw, 1.6rem);
       font-style: italic;
       background: linear-gradient(135deg, #ff6b9d, #ffaac8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: .5rem;
     }
+    .signature { color: rgba(255,255,255,.28); font-size: .82rem; letter-spacing: .1em; }
 
-    .signature {
-      color: rgba(255,255,255,.28);
-      font-size: .82rem;
-      letter-spacing: .1em;
-    }
-
-    /* ---- Button ---- */
+    /* ======= BUTTON ======= */
     .btn {
       display: inline-block;
       background: linear-gradient(135deg, #ff6b9d, #c850c0);
-      color: #fff;
-      border: none;
-      padding: 12px 36px;
-      font-size: .9rem;
-      border-radius: 50px;
-      cursor: pointer;
-      letter-spacing: .07em;
-      font-family: inherit;
-      transition: transform .18s, box-shadow .18s;
+      color: #fff; border: none;
+      padding: 12px 36px; font-size: .9rem;
+      border-radius: 50px; cursor: pointer;
+      letter-spacing: .07em; font-family: inherit;
+      position: relative; overflow: hidden;
       box-shadow: 0 4px 22px rgba(255,107,157,.38);
+      transition: box-shadow .2s;
     }
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(255,107,157,.58);
+    .btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.28) 0%, transparent 65%);
+      opacity: 0; transition: opacity .25s;
     }
-    .btn:active { transform: translateY(-1px); }
+    .btn:hover::before { opacity: 1; }
+    .btn:active { filter: brightness(.9); }
 
-    /* ---- Progress dots ---- */
-    .dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 1.6rem;
-      min-height: 10px;
+    /* ======= DOTS ======= */
+    .dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.6rem; min-height: 10px; }
+    .dot  { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.13); transition: background .35s,transform .35s; }
+    .dot.lit { background:#ff6b9d; transform:scale(1.4); }
+
+    /* ======= RIPPLE ======= */
+    .ripple-ring {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 300;
+      transform: translate(-50%,-50%) scale(0);
+      animation: ring-expand linear forwards;
     }
-    .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.14);
-      transition: background .35s, transform .35s;
+    @keyframes ring-expand {
+      from { transform: translate(-50%,-50%) scale(0); opacity: .75; }
+      to   { transform: translate(-50%,-50%) scale(1); opacity: 0; }
     }
-    .dot.lit { background: #ff6b9d; transform: scale(1.35); }
   </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
+<div id="aurora"></div>
+<div id="flash"></div>
 
-<div class="stage">
+<div class="stage" id="stage">
   <div class="dots" id="dots"></div>
 
   <!-- 0: Title -->
   <div class="card visible" id="c0">
     <div class="name">Диана</div>
     <div class="for-you">это тебе ✦</div>
-    <button class="btn" onclick="next()">открыть &rarr;</button>
+    <button class="btn" onclick="next(event)">открыть &rarr;</button>
   </div>
 
   <!-- 1: Beautiful -->
@@ -218,47 +303,47 @@
     <img src="diana-photos/beautiful.jpg" class="photo-beautiful" alt="">
     <div class="caption-big">Ты такая.</div>
     <div class="caption-small">и я каждый раз не верю своим глазам</div>
-    <button class="btn" onclick="next()">дальше &rarr;</button>
+    <button class="btn" onclick="next(event)">дальше &rarr;</button>
   </div>
 
-  <!-- 2: Pink bear hat -->
+  <!-- 2: Bear hat -->
   <div class="card" id="c2">
-    <div class="polaroid" style="--rot: -2deg">
+    <div class="polaroid" style="--rot:-2deg">
       <img src="diana-photos/funny4.jpg" alt="">
     </div>
     <div class="caption-big">И такая.</div>
     <div class="caption-small">медведь? принцесса? не важно — в любом образе</div>
-    <button class="btn" onclick="next()">дальше &rarr;</button>
+    <button class="btn" onclick="next(event)">дальше &rarr;</button>
   </div>
 
-  <!-- 3: Red helmet Modi -->
+  <!-- 3: Red helmet -->
   <div class="card" id="c3">
-    <div class="polaroid" style="--rot: 1.5deg">
+    <div class="polaroid" style="--rot:1.5deg">
       <img src="diana-photos/funny3.jpg" alt="">
     </div>
     <div class="caption-big">Главный инженер Modi.</div>
     <div class="caption-small">диссертация по строительным шлемам защищена успешно</div>
-    <button class="btn" onclick="next()">дальше &rarr;</button>
+    <button class="btn" onclick="next(event)">дальше &rarr;</button>
   </div>
 
-  <!-- 4: Ice rink puffer -->
+  <!-- 4: Ice rink -->
   <div class="card" id="c4">
-    <div class="polaroid" style="--rot: -1.5deg">
+    <div class="polaroid" style="--rot:-1.5deg">
       <img src="diana-photos/funny2.jpg" alt="">
     </div>
     <div class="caption-big">Маленький пуфик на льду.</div>
     <div class="caption-small">укутана во весь тёплый мир. мне нравится.</div>
-    <button class="btn" onclick="next()">дальше &rarr;</button>
+    <button class="btn" onclick="next(event)">дальше &rarr;</button>
   </div>
 
   <!-- 5: Thumbs up groceries -->
   <div class="card" id="c5">
-    <div class="polaroid" style="--rot: 2deg">
+    <div class="polaroid" style="--rot:2deg">
       <img src="diana-photos/funny1.jpg" alt="">
     </div>
     <div class="caption-big">Выход в подъезд — тоже выход.</div>
     <div class="caption-small">kappa + пакеты + уверенность = стиль</div>
-    <button class="btn" onclick="next()">дальше &rarr;</button>
+    <button class="btn" onclick="next(event)">дальше &rarr;</button>
   </div>
 
   <!-- 6: Final -->
@@ -267,8 +352,8 @@
     <div class="final-text">
       <p>Знаешь что?</p>
       <p>Мне нравятся все твои стороны.<br>
-      Та которая красивая.<br>
-      И та которая медведь в ТЦ.</p>
+         Та которая красивая.<br>
+         И та которая медведь в ТЦ.</p>
       <p>Все. Просто все.</p>
     </div>
     <div class="final-love">Я люблю тебя, Диана.</div>
@@ -277,85 +362,333 @@
 </div>
 
 <script>
-  /* Stars */
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  let W, H, stars;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+/* =====================================================
+   STARS
+   ===================================================== */
+const canvas = document.getElementById('stars');
+const ctx    = canvas.getContext('2d');
+let W, H, stars;
+function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+function makeStars(n) {
+  return Array.from({length:n}, () => ({
+    x: Math.random()*W, y: Math.random()*H,
+    r: Math.random()*1.3+.2, o: Math.random(),
+    d: (Math.random()*.004+.002)*(Math.random()<.5?1:-1)
+  }));
+}
+function tickStars() {
+  ctx.clearRect(0,0,W,H);
+  for (const s of stars) {
+    s.o += s.d;
+    if (s.o>1||s.o<.05) s.d *= -1;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(255,200,230,${s.o.toFixed(2)})`; ctx.fill();
   }
+  requestAnimationFrame(tickStars);
+}
+resize(); stars = makeStars(160); tickStars();
+window.addEventListener('resize', () => { resize(); stars = makeStars(160); });
 
-  function makeStars(n) {
-    return Array.from({ length: n }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      r: Math.random() * 1.3 + 0.2,
-      o: Math.random(),
-      d: (Math.random() * 0.004 + 0.002) * (Math.random() < .5 ? 1 : -1)
-    }));
+/* =====================================================
+   THEMES — per card
+   ===================================================== */
+const THEMES = [
+  { color:'#ff6b9d', bg:'radial-gradient(ellipse at 30% 50%, #ff6b9d30, transparent 65%)',
+    glyphs:['✦','★','✶','⭐','✨'] },
+  { color:'#ff6b9d', bg:'radial-gradient(ellipse at 60% 30%, #ff6b9d40, transparent 60%), radial-gradient(ellipse at 30% 75%, #ffaac830, transparent 55%)',
+    glyphs:['🌸','💐','🌺','✨','🌹'] },
+  { color:'#d4a86a', bg:'radial-gradient(ellipse at 50% 50%, #c8a88225, transparent 60%)',
+    glyphs:['🐾','🐻','🌙','⭐','🍯'] },
+  { color:'#ff5533', bg:'radial-gradient(ellipse at 50% 40%, #ff443330, transparent 60%), radial-gradient(ellipse at 20% 80%, #ff990025, transparent 50%)',
+    glyphs:['⚡','🔧','⚙️','💥','🪖'] },
+  { color:'#66aaff', bg:'radial-gradient(ellipse at 50% 30%, #88ccff30, transparent 60%), radial-gradient(ellipse at 70% 70%, #ffffff18, transparent 55%)',
+    glyphs:['❄️','⛸️','🌨️','💙','🤍'] },
+  { color:'#ffd60a', bg:'radial-gradient(ellipse at 40% 60%, #ffd60a20, transparent 60%), radial-gradient(ellipse at 70% 30%, #ff990025, transparent 55%)',
+    glyphs:['👍','🛍️','💪','⭐','🌟'] },
+  { color:'#ff6b9d', bg:'radial-gradient(ellipse at 50% 50%, #ff6b9d50, transparent 50%), radial-gradient(ellipse at 20% 20%, #c850c040, transparent 48%), radial-gradient(ellipse at 80% 80%, #ffaac830, transparent 45%)',
+    glyphs:['❤️','💕','💖','💗','💓','✨','🌟'] },
+];
+
+/* =====================================================
+   PARTICLE ENGINE
+   ===================================================== */
+class Particle {
+  constructor(x, y, sym, color) {
+    this.el = document.createElement('div');
+    this.el.style.cssText = `position:fixed;left:${x}px;top:${y}px;font-size:${Math.random()*16+10}px;pointer-events:none;z-index:9999;user-select:none;line-height:1;`;
+    this.el.textContent = sym;
+    this.el.style.color = color;
+    document.body.appendChild(this.el);
+    const angle = Math.random()*Math.PI*2;
+    const spd   = Math.random()*580+140;
+    this.vx = Math.cos(angle)*spd;
+    this.vy = Math.sin(angle)*spd - 200;
+    this.x=x; this.y=y;
+    this.life=1; this.decay=Math.random()*.5+.35;
+    this.rot=Math.random()*360; this.rotSpd=(Math.random()-.5)*720;
+    this.gravity=680;
   }
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    for (const s of stars) {
-      s.o += s.d;
-      if (s.o > 1 || s.o < 0.05) s.d *= -1;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,200,230,${s.o.toFixed(2)})`;
-      ctx.fill();
-    }
-    requestAnimationFrame(tick);
+  update(dt) {
+    this.vy += this.gravity*dt;
+    this.x += this.vx*dt; this.y += this.vy*dt;
+    this.life -= this.decay*dt; this.rot += this.rotSpd*dt;
+    this.el.style.left = this.x+'px'; this.el.style.top = this.y+'px';
+    this.el.style.opacity = Math.max(0,this.life);
+    this.el.style.transform = `rotate(${this.rot}deg) scale(${.4+this.life*.6})`;
+    return this.life>0;
   }
+  destroy() { this.el.remove(); }
+}
 
-  resize();
-  stars = makeStars(160);
-  tick();
-  window.addEventListener('resize', () => { resize(); stars = makeStars(160); });
+const pool = [];
+let lastT  = performance.now();
+function pLoop() {
+  const now = performance.now();
+  const dt  = Math.min((now-lastT)/1000, .05);
+  lastT = now;
+  for (let i=pool.length-1; i>=0; i--) {
+    if (!pool[i].update(dt)) { pool[i].destroy(); pool.splice(i,1); }
+  }
+  requestAnimationFrame(pLoop);
+}
+pLoop();
 
-  /* Floating hearts */
-  const GLYPHS = ['♥', '✶', '✿', '❀', '♡'];
-  const COLORS = ['#ff6b9d','#ffaac8','#ffd6e8','#ff4d8a','#ffa0c4'];
+function burst(x, y, n, glyphs, color) {
+  for (let i=0; i<n; i++) {
+    const sym = glyphs[Math.floor(Math.random()*glyphs.length)];
+    pool.push(new Particle(x, y, sym, color));
+  }
+}
 
-  function spawnHeart() {
+/* =====================================================
+   SCREEN SHAKE
+   ===================================================== */
+const stage = document.getElementById('stage');
+function shake() {
+  stage.classList.remove('shaking');
+  void stage.offsetWidth;
+  stage.classList.add('shaking');
+  stage.addEventListener('animationend', () => stage.classList.remove('shaking'), {once:true});
+}
+
+/* =====================================================
+   COLOR FLASH
+   ===================================================== */
+const flashEl = document.getElementById('flash');
+function flash(color) {
+  flashEl.style.background = color;
+  flashEl.style.opacity = '.3';
+  setTimeout(() => flashEl.style.opacity = '0', 110);
+}
+
+/* =====================================================
+   RIPPLE RINGS
+   ===================================================== */
+function ripple(x, y, color) {
+  [1,2,3].forEach(i => {
+    const r = document.createElement('div');
+    r.className = 'ripple-ring';
+    const size = i * 220;
+    r.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;border:2.5px solid ${color};animation-duration:${.65+i*.18}s;animation-delay:${(i-1)*.09}s;`;
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 1400);
+  });
+}
+
+/* =====================================================
+   AURORA BACKGROUND
+   ===================================================== */
+const auroraEl = document.getElementById('aurora');
+function setAurora(i) { auroraEl.style.background = THEMES[i].bg; }
+setAurora(0);
+
+/* =====================================================
+   AMBIENT FLOATERS
+   ===================================================== */
+let ambTimer = null;
+function startAmbient(i) {
+  if (ambTimer) clearInterval(ambTimer);
+  const t = THEMES[i];
+  ambTimer = setInterval(() => {
     const el = document.createElement('div');
-    el.className = 'heart-particle';
-    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-    const sz = Math.random() * 18 + 9;
-    el.style.cssText = `left:${Math.random()*100}vw;font-size:${sz}px;color:${COLORS[Math.floor(Math.random()*COLORS.length)]};animation-duration:${(Math.random()*5+7).toFixed(1)}s;`;
+    el.className = 'floater';
+    el.textContent = t.glyphs[Math.floor(Math.random()*t.glyphs.length)];
+    el.style.cssText += `left:${Math.random()*100}vw;font-size:${Math.random()*20+9}px;animation-duration:${(Math.random()*5+7).toFixed(1)}s;`;
     document.body.appendChild(el);
     el.addEventListener('animationend', () => el.remove());
+  }, 650);
+}
+startAmbient(0);
+
+/* =====================================================
+   PHOTO SPARKLES
+   ===================================================== */
+let spkTimer = null;
+const SPARKS = ['✦','★','✶','✷','💫','⭐'];
+function startSparkles(cardIdx) {
+  if (spkTimer) clearInterval(spkTimer);
+  if (cardIdx===0||cardIdx===6) return;
+  spkTimer = setInterval(() => {
+    const img = document.querySelector(`#c${cardIdx} img`);
+    if (!img) return;
+    const r = img.getBoundingClientRect();
+    if (!r.width) return;
+    const el = document.createElement('div');
+    el.className = 'sparkle-el';
+    el.textContent = SPARKS[Math.floor(Math.random()*SPARKS.length)];
+    el.style.cssText = `left:${r.left+Math.random()*r.width}px;top:${r.top+Math.random()*r.height}px;font-size:${Math.random()*14+8}px;color:rgba(255,255,210,.95);`;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }, 500);
+}
+
+/* =====================================================
+   TEXT REVEAL — letter by letter
+   ===================================================== */
+function revealCaptions(card) {
+  card.querySelectorAll('.caption-big,.caption-small').forEach((el, ei) => {
+    const chars = [...el.textContent];
+    el.innerHTML = chars.map(c =>
+      `<span style="display:inline-block;opacity:0;transform:translateY(9px)">${c===' '?'&nbsp;':c}</span>`
+    ).join('');
+    el.querySelectorAll('span').forEach((s,i) => {
+      setTimeout(() => {
+        s.style.transition = 'opacity .22s, transform .22s';
+        s.style.opacity    = '1';
+        s.style.transform  = 'translateY(0)';
+      }, ei*80 + i*22);
+    });
+  });
+}
+
+/* =====================================================
+   MOUSE — PARALLAX + MAGNETIC BUTTON + SHIMMER
+   ===================================================== */
+document.addEventListener('mousemove', e => {
+  const cx = innerWidth/2, cy = innerHeight/2;
+  const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
+
+  // Parallax on photo
+  const photo = document.querySelector('.card.visible .photo-beautiful');
+  if (photo) photo.style.transform = `perspective(900px) rotateX(${-dy*7}deg) rotateY(${dx*7}deg)`;
+
+  const pol = document.querySelector('.card.visible .polaroid');
+  if (pol) {
+    const base = parseFloat(pol.style.getPropertyValue('--rot')||pol.style.cssText.match(/--rot:\s*([-\d.]+)/)?.[1]||0);
+    pol.style.transform = `perspective(900px) rotateX(${-dy*5}deg) rotateY(${dx*5}deg) rotate(${base}deg)`;
   }
-  setInterval(spawnHeart, 900);
 
-  /* Cards */
-  const TOTAL = 7;
-  let cur = 0;
-
-  const dotsEl = document.getElementById('dots');
-  const dotEls = [];
-  for (let i = 1; i < TOTAL; i++) {
-    const d = document.createElement('div');
-    d.className = 'dot';
-    dotsEl.appendChild(d);
-    dotEls.push(d);
+  // Magnetic button
+  const btn = document.querySelector('.card.visible .btn');
+  if (btn) {
+    const r    = btn.getBoundingClientRect();
+    const bx   = r.left+r.width/2, by = r.top+r.height/2;
+    const dist = Math.hypot(e.clientX-bx, e.clientY-by);
+    const pull = dist<110 ? (1-dist/110)*20 : 0;
+    const ang  = Math.atan2(e.clientY-by, e.clientX-bx);
+    btn.style.transform = pull ? `translate(${Math.cos(ang)*pull}px,${Math.sin(ang)*pull}px) scale(1.04)` : '';
+    btn.style.boxShadow = pull ? `0 6px 32px rgba(255,107,157,.7)` : '';
+    // shimmer position
+    btn.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100).toFixed(0)+'%');
+    btn.style.setProperty('--my', ((e.clientY-r.top)/r.height*100).toFixed(0)+'%');
   }
+});
 
-  function updateDots() {
-    dotEls.forEach((d, i) => d.classList.toggle('lit', i < cur));
-  }
+document.addEventListener('mouseleave', () => {
+  const photo = document.querySelector('.card.visible .photo-beautiful');
+  if (photo) photo.style.transform = '';
+  const pol = document.querySelector('.card.visible .polaroid');
+  if (pol) { const b = pol.style.getPropertyValue('--rot'); pol.style.transform = `rotate(${b})`; }
+  const btn = document.querySelector('.card.visible .btn');
+  if (btn) { btn.style.transform = ''; btn.style.boxShadow = ''; }
+});
 
-  function next() {
-    if (cur >= TOTAL - 1) return;
-    document.getElementById('c' + cur).classList.remove('visible');
+/* =====================================================
+   FIREWORKS (final card)
+   ===================================================== */
+function fireworks() {
+  [[.18,.28],[.5,.15],[.82,.28],[.1,.52],[.9,.52],[.3,.72],[.7,.68],[.5,.42]].forEach(([rx,ry],i) => {
+    setTimeout(() => burst(W*rx, H*ry, 55, THEMES[6].glyphs, THEMES[6].color), i*230);
+  });
+}
+
+/* =====================================================
+   CARD TRANSITIONS
+   ===================================================== */
+const EXITS  = ['ex-left','ex-right','ex-shrink','ex-spin','ex-fold','ex-drop'];
+const ENTERS = ['en-zoom','en-slide','en-bounce','en-flip','en-glitch','en-rise','en-spin-in'];
+const TOTAL  = 7;
+let cur = 0, busy = false;
+
+// Build dots
+const dotsEl = document.getElementById('dots');
+const dotEls = [];
+for (let i=1; i<TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot'; dotsEl.appendChild(d); dotEls.push(d);
+}
+function updateDots() { dotEls.forEach((d,i) => d.classList.toggle('lit', i<cur)); }
+
+function next(e) {
+  if (cur>=TOTAL-1 || busy) return;
+  busy = true;
+
+  const btn  = e.currentTarget;
+  const br   = btn.getBoundingClientRect();
+  const bx   = br.left+br.width/2, by = br.top+br.height/2;
+  const theme = THEMES[cur];
+
+  // === 1. Burst from button ===
+  burst(bx, by, 80, theme.glyphs, theme.color);
+
+  // === 2. Flash + ripple ===
+  flash(theme.color);
+  ripple(innerWidth/2, innerHeight/2, theme.color);
+
+  // === 3. Shake ===
+  shake();
+
+  // === 4. Exit old card with random animation ===
+  const oldCard = document.getElementById('c'+cur);
+  const exitCls = EXITS[Math.floor(Math.random()*EXITS.length)];
+  oldCard.classList.add(exitCls);
+
+  setTimeout(() => {
+    // Hide old
+    oldCard.classList.remove('visible', exitCls);
+
+    // Advance
     cur++;
-    document.getElementById('c' + cur).classList.add('visible');
     updateDots();
-    if (cur === TOTAL - 1) {
-      for (let i = 0; i < 16; i++) setTimeout(spawnHeart, i * 150);
+    setAurora(cur);
+    startAmbient(cur);
+    startSparkles(cur);
+
+    // === 5. Enter new card with random animation ===
+    const newCard  = document.getElementById('c'+cur);
+    const enterCls = ENTERS[Math.floor(Math.random()*ENTERS.length)];
+    newCard.classList.add('visible', enterCls);
+    newCard.addEventListener('animationend', () => newCard.classList.remove(enterCls), {once:true});
+
+    // === 6. Second burst from center ===
+    setTimeout(() => burst(innerWidth/2, innerHeight*.38, 45, THEMES[cur].glyphs, THEMES[cur].color), 90);
+
+    // === 7. Extra screen flash on entry ===
+    setTimeout(() => flash(THEMES[cur].color), 150);
+
+    // === 8. Text reveal ===
+    setTimeout(() => revealCaptions(newCard), 180);
+
+    // === 9. Final card — fireworks ===
+    if (cur===TOTAL-1) {
+      setTimeout(fireworks, 300);
+      setTimeout(fireworks, 1900);
+      setTimeout(fireworks, 3400);
     }
-  }
+
+    setTimeout(() => busy=false, 200);
+  }, 490);
+}
 </script>
 </body>
 </html>
